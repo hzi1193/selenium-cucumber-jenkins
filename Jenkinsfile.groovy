@@ -18,8 +18,11 @@ pipeline {
 
         stage('Test Stage') {
             steps {
-                withMaven('maven_3_9_5') {
-                    sh 'mvn clean verify -Dcucumber.filter.tags="@PRUEBA1"'
+                script {
+                    def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+                    withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
+                        sh "${mvnHome}/bin/mvn clean verify -Dcucumber.filter.tags=\"@PRUEBA1\""
+                    }
                 }
             }
 
