@@ -7,7 +7,7 @@ pipeline {
         stage('Compile Stage') {
 
             steps {
-                withMaven('manven_3_9_5') {
+                withMaven('maven_3_9_5') {
                     sh 'mvn clean compile'
                 }
             }
@@ -15,7 +15,7 @@ pipeline {
 
         stage('Test Stage') {
             steps {
-                withMaven('manven_3_9_5') {
+                withMaven('maven_3_9_5') {
                     sh 'mvn clean verify -Dcucumber.filter.tags="@PRUEBA1"'
                 }
             }
