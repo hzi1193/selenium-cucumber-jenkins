@@ -6,7 +6,6 @@ pipeline {
         stage('Compile Stage') {
             steps {
                 script {
-                    println('***COMPILE STAGE ***')
                     def mvnHome = tool name: 'maven_3_9_5', type: 'maven'
                     withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
                         bat "${mvnHome}\\bin\\mvn clean compile"
@@ -19,10 +18,9 @@ pipeline {
         stage('Test Stage') {
             steps {
                 script {
-                    println('***TEST STAGE ***')
                     def mvnHome = tool name: 'maven_3_9_5', type: 'maven'
                     withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
-                        bat '${mvnHome}\\bin\\mvn clean verify -Dcucumber.filter.tags=\"@PRUEBA1\"'
+                        bat "${mvnHome}\\bin\\mvn clean verify -Dcucumber.filter.tags=\"@PRUEBA1\""
                     }
                 }
             }
