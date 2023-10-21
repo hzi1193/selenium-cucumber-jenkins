@@ -5,11 +5,13 @@ pipeline {
     stages {
 
         stage('Compile Stage') {
-
             steps {
-                withMaven('maven_3_9_5') {
-                    sh 'mvn clean compile'
-                }
+                    script{
+                        def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+                        withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
+                            sh '${mvnHome}/bin/mvn clean compile'
+                    }
+
             }
         }
 
